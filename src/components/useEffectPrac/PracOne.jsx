@@ -16,38 +16,43 @@ export default function PracOne() {
     }
 
     const getPhotos = useCallback(
-        async ( page = 1 ) => {
+        async ( page = 1, isNew ) => {
             isLoading.current = true;
             try {
                 const res = await axios.get(`${api}?client_id=${clientId}&query=${keyword}&page=${ page }`)
                 const { results } = res.data
-                console.log(results);
+                setTimeout(() => {
+                    isLoading.current = false
+                }, 1000)
+                if ( isNew ) {
+                    serPhotoArr( results )
+                    return
+                }
                 serPhotoArr((preData) => {
                     return [ ...preData, ...results ]
                 })
             } catch(error) {
                 console.error(error)
-            }
-            setTimeout(() => {
                 isLoading.current = false
-            }, 1000)
+            }
         }, [ keyword ]
     )
 
     const listRef = useRef(null);
 
     useEffect(() => {
-        getPhotos()
+        getPhotos( 1, true )
         window.addEventListener( 'scroll', () => {
             const { offsetHeight, offsetTop } = listRef.current;
             const wrapHeight = offsetHeight + offsetTop - window.innerHeight;
+            console.log(isLoading.current);
             if ( !isLoading.current && window.scrollY >= wrapHeight ) {
-                console.log(1234);
+                console.log('fetch');
                 currentPage.current ++
-                getPhotos(currentPage.current)
+                getPhotos(currentPage.current, false)
             }
         } )
-    }, [ getPhotos ])
+    }, [ getPhotos, keyword ])
 
     return (
         <div>

@@ -5,3 +5,23 @@
 .object-cover {
     object-fit: cover;
 }
+
+.loading {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(5px);
+    opacity: 0;
+    transition: all .3s;
+    pointer-events: none;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &.show {
+        opacity: 1;
+    }
+}
