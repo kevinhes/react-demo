@@ -6,6 +6,7 @@ import PracOne from "./components/useEffectPrac/PracOne";
 import PracTwo from "./components/useEffectPrac/PracTwo";
 import PracThree from "./components/useEffectPrac/PracThree";
 import PracFour from "./components/useEffectPrac/PracFour";
+import PracFive from "./components/useEffectPrac/PracFive";
 
 function App() { 
   return (
@@ -17,7 +18,8 @@ function App() {
           <Route path='prac-one' element={ <PracOne/> }></Route>
           <Route path='prac-two' element={ <PracTwo/> }></Route>
           <Route path='prac-three' element={ <PracThree/> }></Route>
-          <Route index element={ <PracFour/> }></Route>
+          <Route path='prac-four' element={ <PracFour/> }></Route>
+          <Route index element={ <PracFive/> }></Route>
         </Route>
       </Routes>
     </>
